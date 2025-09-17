@@ -3,8 +3,8 @@
 
 <p align="center">
     <b>Demo Video:</b><br>
-    <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">
-        <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg" alt="Demo Video" width="480"/>
+    <a href="https://youtu.be/P4rkGS0oDI0" target="_blank">
+        <img src="https://img.youtube.com/vi/P4rkGS0oDI0/0.jpg" alt="Demo Video" width="480"/>
     </a>
 </p>
 
@@ -73,7 +73,24 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ---
 
-## 🔎 Quick Testing on Browser
+
+## Testing Online Deployment
+
+
+You can also use the shared Postman workspace for this project:
+[Postman Workspace: FMC Assignment](https://www.postman.com/aerospace-geologist-77825313/workspace/fmc-assignment/environment/27784102-3522841f-5ea2-4375-8059-a2e3f6cf544d?action=share&creator=27784102&active-environment=27784102-3522841f-5ea2-4375-8059-a2e3f6cf544d)
+
+
+Deployed API: [https://fmc-16sd.onrender.com](https://fmc-16sd.onrender.com)
+
+If you have deployed your API (e.g., on Render), you can test it online:
+
+1. In Postman, set the `baseUrl` variable in your environment to your Render URL (e.g., `https://your-app.onrender.com`).
+2. Use the Register and Login requests to create a user and obtain a token.
+3. Use the Ships endpoints (Create, Get, Update, Delete) as usual—your token will be used automatically.
+4. You can also check `/health` in your browser to verify the API is running.
+
+All automated and manual tests work the same way—just point to your online URL!
 
 - Test simple GET endpoints (like `/health` or `/ships`) directly in your browser.
 - For POST, PUT, DELETE, or authenticated requests, use Postman or curl.
@@ -82,7 +99,7 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ## API Endpoints
 
-The base URL is `http://localhost:3000`.
+The base URL is `http://localhost:3000` or `https://fmc-16sd.onrender.com`.
 
 | Method | Endpoint             | Description                       | Auth Required |
 | :----- | :------------------- | :-------------------------------- | :-----------: |
