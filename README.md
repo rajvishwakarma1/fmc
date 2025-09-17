@@ -2,7 +2,7 @@
 # Assignment for Fathom Marine Consultants
 
 <p align="center">
-    <b>Demo Video:</b><br>
+    <b>Demo Video</b><br>
     <a href="https://youtu.be/P4rkGS0oDI0" target="_blank">
         <img src="https://img.youtube.com/vi/P4rkGS0oDI0/0.jpg" alt="Demo Video" width="480"/>
     </a>
@@ -63,12 +63,6 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
     The server will start on `http://localhost:3000` with hot-reloading.
     ```sh
     npm run dev
-    ```
-
--   **Run Tests:**
-    Execute the API test suite.
-    ```sh
-    npm run test:api
     ```
 
 ---
