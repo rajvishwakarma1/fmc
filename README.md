@@ -1,4 +1,12 @@
+
 # Assignment for Fathom Marine Consultants
+
+<p align="center">
+    <b>Demo Video:</b><br>
+    <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">
+        <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg" alt="Demo Video" width="480"/>
+    </a>
+</p>
 
 A simple and robust RESTful API for managing ships, built with Node.js, Express, and MongoDB.
 
