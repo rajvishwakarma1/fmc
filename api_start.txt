@@ -1,0 +1,75 @@
+API Start Guide
+===============
+
+This guide explains how to set up, run, and test the Ships API, including Postman usage and endpoint details.
+
+1. Prerequisites
+----------------
+- Node.js (v18.x or higher): https://nodejs.org/
+- npm: https://www.npmjs.com/
+- MongoDB: https://www.mongodb.com/
+- Postman: https://www.postman.com/downloads/
+
+2. Setup Steps
+--------------
+a. Clone the Repository
+   git clone https://github.com/rajvishwakarma1/fmc.git
+   cd main
+
+b. Install Dependencies
+   npm install
+
+c. Configure Environment Variables
+   - Copy .env.example to .env:
+     cp .env.example .env
+   - Edit .env and set your MONGODB_URI and JWT_SECRET.
+
+3. Running the API
+------------------
+a. Start the Server (Development)
+   npm run dev
+   (API will be at http://localhost:3000)
+
+b. Run Automated Tests
+   npm run test:api
+
+4. Testing with Postman
+-----------------------
+- Open Postman.
+- Import postman/Ships-API.postman_collection.json and postman/Ships-API.postman_environment.json.
+- Select the environment and run requests in order:
+  Register User -> Login User (save the token) -> Use token for all protected endpoints (ships CRUD)
+
+5. API Endpoints Explained
+--------------------------
+Method  Endpoint         Description                                 Auth Required
+GET     /health          Health check, returns API status            No
+POST    /auth/register   Register a new user                         No
+POST    /auth/login      Login and receive JWT token                 No
+GET     /ships           List all ships                              Yes
+POST    /ships           Create a new ship                           Yes
+GET     /ships/:id       Get ship by ID                              Yes
+PUT     /ships/:id       Update ship by ID                           Yes
+DELETE  /ships/:id       Delete ship by ID                           Yes
+
+- For protected endpoints, add Authorization: Bearer <token> header.
+
+6. Example Usage
+----------------
+Register User:
+  curl -X POST http://localhost:3000/auth/register \
+    -H "Content-Type: application/json" \
+    -d '{"username":"testuser","password":"TestPass123!"}'
+
+Login User:
+  curl -X POST http://localhost:3000/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"username":"testuser","password":"TestPass123!"}'
+
+Create Ship (Authenticated):
+  curl -X POST http://localhost:3000/ships \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer <JWT_TOKEN>" \
+    -d '{"name":"Titanic","description":"Famous ship","dateTime":"2025-09-17T12:00:00Z"}'
+
+For more, see the README.md or open an issue.

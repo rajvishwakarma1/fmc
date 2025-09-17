@@ -17,7 +17,10 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ---
 
+
 ## Features
+
+[See the full API Start Guide](./api_start.md)
 
 -   **Authentication:** Secure endpoints using JSON Web Tokens (JWT).
 -   **Validation:** Built-in validation and clear error handling for all incoming requests.
