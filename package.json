@@ -1,11 +1,11 @@
 {
-  "name": "ships-api",
+  "name": "fmc",
   "private": true,
   "engines": {
     "node": ">=18.0.0"
   },
   "version": "1.0.0",
-  "description": "REST API for managing ships, built with Node.js, Express, and MongoDB.",
+  "description": "Assignment for Fathom Marine Consultants. RESTful API for managing ships with authentication, validation, and error handling.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -21,7 +21,7 @@
     "mongodb",
     "rest"
   ],
-  "author": "",
+  "author": "Raj Vishwakarma <rajvishwakarma303@gmail.com> (https://github.com/rajvishwakarma1)",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

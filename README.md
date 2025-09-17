@@ -85,9 +85,15 @@ curl -X DELETE http://localhost:3000/ships/<SHIP_ID> \
 
 
 © 2025 Ships API
-## Ships API
+
+# Assignment for Fathom Marine Consultants
 
 Simple RESTful API for managing ships, built with Node.js, Express, and MongoDB.
+
+**Author:** Raj Vishwakarma  
+**Email:** rajvishwakarma303@gmail.com  
+**GitHub:** [rajvishwakarma1](https://github.com/rajvishwakarma1)  
+**Total time taken:** 5 hours
 
 ### Setup
 1. Clone the repo and install dependencies:
