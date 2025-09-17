@@ -1,0 +1,458 @@
+{
+  "info": {
+    "_postman_id": "fmc-ships-api-collection",
+    "name": "Ships API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for Ships API with parameterized URLs, authentication, and test scripts."
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"TestPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.code === 201);",
+                  "const json = pm.response.json();",
+                  "pm.expect(_.has(json, 'message')).to.be.true;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"testuser\",\n  \"password\": \"TestPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(_.has(json, 'token')).to.be.true;",
+                  "pm.environment.set('authToken', json.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ships",
+      "item": [
+        {
+          "name": "Get All Ships",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/ships",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(Array.isArray(json)).to.be.true;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Ship",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Titanic\",\n  \"description\": \"Famous ship\",\n  \"dateTime\": \"2025-09-17T12:00:00Z\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ships",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 201', () => pm.response.code === 201);",
+                  "const json = pm.response.json();",
+                  "pm.expect(_.has(json, 'id')).to.be.true;",
+                  "pm.environment.set('testShipId', json.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Ship By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/ships/{{testShipId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships", "{{testShipId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.id).to.eql(pm.environment.get('testShipId'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Update Ship",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Titanic\",\n  \"description\": \"Updated description\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ships/{{testShipId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships", "{{testShipId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.name).to.eql('Updated Titanic');"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delete Ship",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ships/{{testShipId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships", "{{testShipId}}"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(_.has(json, 'message')).to.be.true;",
+                  "pm.expect(_.has(json, 'id')).to.be.true;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Ship - Missing Name (400)",
+          "description": "Negative test: Missing required field 'name' should trigger 400 validation error.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{authToken}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"No name\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ships",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 400', () => pm.response.code === 400);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.error).to.exist;",
+                  "pm.expect(json.message).to.eql('Validation failed');",
+                  "pm.expect(Array.isArray(json.details)).to.be.true;",
+                  "pm.expect(json.details[0]).to.have.property('field');",
+                  "pm.expect(json.details[0]).to.have.property('message');"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Ship - Unauthorized (401)",
+          "description": "Negative test: Missing Authorization header should trigger 401 error.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"NoAuth\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ships",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 401', () => pm.response.code === 401);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.error).to.match(/Invalid|Missing/);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Create Ship - Invalid Token (401)",
+          "description": "Negative test: Invalid Bearer token should trigger 401 error.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer badtoken" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"BadToken\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ships",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 401', () => pm.response.code === 401);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.error).to.match(/Invalid|Missing/);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Ship By Invalid ID (400)",
+          "description": "Negative test: Invalid ObjectId format should trigger 400 error.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/ships/invalidid",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships", "invalidid"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 400', () => pm.response.code === 400);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.error).to.exist;",
+                  "pm.expect(json.message).to.exist;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Get Ship By Nonexistent ID (404)",
+          "description": "Negative test: Nonexistent but valid ObjectId should trigger 404 Not found.",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/ships/507f1f77bcf86cd799439011",
+              "host": ["{{baseUrl}}"],
+              "path": ["ships", "507f1f77bcf86cd799439011"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 404', () => pm.response.code === 404);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.error).to.eql('Not found');"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Health Endpoint",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('status 200', () => pm.response.code === 200);",
+                  "const json = pm.response.json();",
+                  "pm.expect(json.status).to.eql('ok');"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const jwtDecode = function(token) {",
+          "  if (!token) return {};",
+          "  const parts = token.split('.');",
+          "  if (parts.length !== 3) return {};",
+          "  try {",
+          "    return JSON.parse(atob(parts[1].replace(/-/g, '+').replace(/_/g, '/')));",
+          "  } catch (e) { return {}; }",
+          "};",
+          "const token = pm.environment.get('authToken');",
+          "let exp = pm.environment.get('authTokenExp');",
+          "let needsLogin = false;",
+          "if (!token) { needsLogin = true; }",
+          "else {",
+          "  const decoded = jwtDecode(token);",
+          "  exp = decoded.exp ? decoded.exp * 1000 : 0;",
+          "  pm.environment.set('authTokenExp', exp);",
+          "  if (!exp || exp < Date.now() + 5 * 60 * 1000) needsLogin = true;",
+          "}",
+          "if (needsLogin) {",
+          "  pm.sendRequest({",
+          "    url: pm.environment.get('baseUrl') + '/auth/login',",
+          "    method: 'POST',",
+          "    header: { 'Content-Type': 'application/json' },",
+          "    body: {",
+          "      mode: 'raw',",
+          "      raw: JSON.stringify({",
+          "        username: pm.environment.get('username'),",
+          "        password: pm.environment.get('password')",
+          "      })",
+          "    }",
+          "  }, function (err, res) {",
+          "    if (!err && res && res.json().token) {",
+          "      pm.environment.set('authToken', res.json().token);",
+          "      const decoded = jwtDecode(res.json().token);",
+          "      if (decoded.exp) pm.environment.set('authTokenExp', decoded.exp * 1000);",
+          "    }",
+          "  });",
+          "}",
+          "// Add Authorization header if needed",
+          "if (pm.request.headers.has('Authorization')) {",
+          "  pm.request.headers.upsert({ key: 'Authorization', value: 'Bearer ' + pm.environment.get('authToken') });",
+          "}"
+        ]
+      }
+    }
+  ]
+}
