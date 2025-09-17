@@ -42,7 +42,7 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 1.  **Clone the repository:**
     ```sh
     git clone https://github.com/rajvishwakarma1/fmc.git
-    cd main
+    cd fmc
     ```
 
 2.  **Install dependencies:**
