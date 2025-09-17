@@ -30,9 +30,9 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ### Prerequisites
 
--   Node.js (v18.x or higher)
--   npm
--   MongoDB
+-   [Node.js (v18.x or higher)](https://nodejs.org/)
+-   [npm](https://www.npmjs.com/)
+-   [MongoDB](https://www.mongodb.com/)
 
 ### Installation & Setup
 
