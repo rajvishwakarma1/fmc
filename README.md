@@ -10,12 +10,14 @@
 
 A simple and robust RESTful API for managing ships, built with Node.js, Express, and MongoDB.
 
+---
+
 **Author:** Raj Vishwakarma  
 **Time to Complete:** 5 hours
 
 ---
 
-## ✨ Features
+## Features
 
 -   **Authentication:** Secure endpoints using JSON Web Tokens (JWT).
 -   **Validation:** Built-in validation and clear error handling for all incoming requests.
@@ -24,7 +26,7 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -68,7 +70,14 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 ---
 
-## ⚙️ API Endpoints
+## 🔎 Quick Testing on Browser
+
+- Test simple GET endpoints (like `/health` or `/ships`) directly in your browser.
+- For POST, PUT, DELETE, or authenticated requests, use Postman or curl.
+
+---
+
+## API Endpoints
 
 The base URL is `http://localhost:3000`.
 
