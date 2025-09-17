@@ -1,5 +1,5 @@
 
-# SHIP Management API Building Assignment for Fathom Marine Consultants
+# Assignment for Fathom Marine Consultants
 
 <p align="center">
     <b>Demo Video</b><br>
