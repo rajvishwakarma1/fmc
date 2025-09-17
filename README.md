@@ -28,7 +28,7 @@ A simple and robust RESTful API for managing ships, built with Node.js, Express,
 
 1.  **Clone the repository:**
     ```sh
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    git clone [https://github.com/rajvishwakarma1/fmc.git](https://github.com/rajvishwakarma1/fmc.git)
     cd main
     ```
 
@@ -79,4 +79,4 @@ The base URL is `http://localhost:3000`.
 
 ---
 
-© 2025 Raj Vishwakarma
+© 2025 Raj Vishwakarma (for FMC Assignment)
